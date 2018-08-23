@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huge.order.mapper.OrderMapper">
+<select id="queryOrder" parameterType="java.lang.String" resultType="com.huge.order.pojo.Order">
+	select * from order_tb where order_id=#{orderId};
+</select>
+<select id="findAllOrder" parameterType="java.lang.String" resultType="com.huge.order.pojo.OrderItem">
+	select *
+	from order_tb a join bus_info_tb b on a.bus_id = b.id
+	where a.user_id=#{userId};
+</select>
+
+<insert id="saveOrder" parameterType="com.huge.order.pojo.Order" >
+
+insert into order_tb(order_id,status,user_id,bus_id)
+values(#{orderId},#{status},#{userId},#{busId})
+
+</insert>
+<update id="cancelOrder" parameterType="com.huge.order.pojo.Order" >
+UPDATE order_tb SET status=2
+WHERE order_id=#{orderId};
+</update>
+
+</mapper>
+
+
+
+
+
+
+
+

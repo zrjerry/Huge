@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huge.web.mapper.BusMapper">
+
+<select id="getLeft" parameterType="java.lang.String" resultType="com.huge.web.pojo.BusInfo">
+	select * from bus_info_tb
+	where (start_city=#{city} or end_city=#{city})
+</select>
+
+<update id="updateTicket">
+		update bus_info_tb
+		<set>
+	      <if test="startStation != null">start_station=#{startStation},</if>
+	      <if test="endStation != null">end_station=#{endStation},</if>
+	      <if test="leftTicket != null">left_ticket=#{leftTicket},</if>
+	      <if test="price != null">price=#{price}</if>
+    	</set>
+		where id=#{id}
+</update>
+
+<delete id="deleteTicket" parameterType="com.huge.web.pojo.BusInfo">
+	delete from bus_info_tb where id=#{id}
+</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
